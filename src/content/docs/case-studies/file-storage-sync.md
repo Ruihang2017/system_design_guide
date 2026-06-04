@@ -137,13 +137,13 @@ flowchart TD
     C -->|POST /chunks/check<br/>which hashes are missing?| MS
     MS -->|query chunk index| DB
     MS -->|missing hashes| C
-    C -->|PUT /chunks/{hash}<br/>upload missing chunks only| CS
-    C -->|POST /files/{id}/versions<br/>commit chunk list| MS
+    C -->|"PUT /chunks/{hash}<br/>upload missing chunks only"| CS
+    C -->|"POST /files/{id}/versions<br/>commit chunk list"| MS
     MS -->|write file_versions row<br/>update files row| DB
     MS -->|append change event| CL
     D2 -->|GET /changes?cursor=...<br/>poll for new events| MS
     MS -->|read change log| CL
-    D2 -->|GET /chunks/{hash}<br/>download changed chunks| CS
+    D2 -->|"GET /chunks/{hash}<br/>download changed chunks"| CS
 ```
 
 **Upload path:** the client splits the file into fixed-size chunks, hashes each one, and asks the Metadata Service which hashes are already on the server. It uploads only the missing chunks directly to object storage, then commits the ordered chunk list as a new file version. If the commit is rejected (stale `parent_version`), it fetches the latest version and reconciles before retrying.

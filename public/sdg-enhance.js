@@ -16,13 +16,13 @@
 
   // ---- storage helpers (fail-safe: private mode / disabled storage) ----
   function load(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch (e) { return fallback; }
+    try { var v = JSON.parse(localStorage.getItem(key)); return v == null ? fallback : v; } catch (e) { return fallback; }
   }
   function save(key, val) {
     try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* ignore */ }
   }
   function slug(s) {
-    return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 64);
+    return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 64).replace(/^-+|-+$/g, '');
   }
   function mkBtn(text) {
     var b = document.createElement('button');
@@ -36,7 +36,7 @@
   var DAY = 86400000;
   var INTERVALS = [0, DAY, 3 * DAY, 7 * DAY, 16 * DAY];
   function interval(box) { return INTERVALS[Math.max(0, Math.min(box | 0, INTERVALS.length - 1))]; }
-  function promote(st, now) { var b = Math.min(((st && st.box) | 0) + 1, INTERVALS.length - 1); return { box: b, due: now + interval(b) }; }
+  function promote(st, now) { var cur = Math.max(0, (st && st.box) | 0); var b = Math.min(cur + 1, INTERVALS.length - 1); return { box: b, due: now + interval(b) }; }
   function demote(now) { return { box: 0, due: now }; }
 
   var STYLE = '' +
@@ -129,7 +129,7 @@
         if (st.box >= 4) mastered++; else learning++;
         if (st.due <= now) due++;
       });
-      status.textContent = ' ' + mastered + ' mastered · ' + learning + ' learning · ' + due + ' due';
+      status.textContent = ' ' + due + ' due now · ' + learning + ' learning · ' + mastered + ' mastered';
       if (dueOnly) applyFilter();
     }
     dueBtn.addEventListener('click', function () { dueOnly = !dueOnly; dueBtn.setAttribute('aria-pressed', dueOnly ? 'true' : 'false'); applyFilter(); });

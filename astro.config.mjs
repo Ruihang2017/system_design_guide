@@ -30,6 +30,9 @@ export default defineConfig({
         // Default Open Graph / Twitter card metadata for richer link previews.
         { tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
         { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+        // Progressive-enhancement script for the optional client-only practice
+        // features (flashcard review mode, random question, progress tracker).
+        { tag: 'script', attrs: { src: '/sdg-enhance.js', defer: true } },
       ],
       sidebar: [
         {
@@ -95,6 +98,7 @@ export default defineConfig({
           label: 'Study & Resources',
           items: [
             { label: 'Study Plan', link: '/resources/study-plan/' },
+            { label: 'Progress Tracker', link: '/resources/progress/' },
             { label: 'Canonical Resources', link: '/resources/reading/' },
             { label: 'Prompts to Fan Out', link: '/resources/fan-out-prompts/' },
           ],

@@ -14,10 +14,11 @@ fast. System design is a different muscle: making things **keep** working when t
 100×, when a server dies at 3am, when the table has 4 billion rows, and when three teams need to
 change the same system without breaking each other.
 
-This repo is the source for that study site. The entire guide — Parts 0–15 plus interview prep — is
+This repo is the source for that study site. The entire guide — Parts 0–15, nine fully worked case
+studies, an interview question bank with model answers, and optional interactive practice — is
 **plain Markdown** in `src/content/docs/`, rendered by [Astro](https://astro.build) +
-[Starlight](https://starlight.astro.build) into a fast static site with full-text search, dark
-mode, and mobile navigation. No backend, no database, no login.
+[Starlight](https://starlight.astro.build) into a fast static site with full-text search, Mermaid
+diagrams, dark mode, and mobile navigation. No backend, no database, no login.
 
 > The throughline: every technique here buys you scale, resilience, or maintainability — usually by
 > trading away another. **Learn the trades, not the trivia.**
@@ -25,17 +26,17 @@ mode, and mobile navigation. No backend, no database, no login.
 ## What's inside
 
 The content is organized so you can **"fan out"**: skim the map, then go deep on one self-contained
-page at a time. 25 pages across seven groups (the left sidebar mirrors this):
+page at a time. 33 pages across seven groups (the left sidebar mirrors this):
 
 | Group | Pages |
 |---|---|
 | **Overview** | Landing · Introduction (how to use / fan out) |
-| **Core Mindset** | `0` Functional vs Non-Functional · `1` Estimation & Numbers · `2` Consistency, CAP & Correctness |
-| **Building Blocks** | `3` Communication & Networking · `4` Databases & Storage · `5` Caching · `6` Messaging & Async · `7` Architecture Patterns · `8` Reliability & Resilience · `9` Observability & Delivery · `10` Specialized Components |
+| **Core Mindset** | `0` Functional vs Non-Functional · `1` Estimation & Numbers · Numbers Everyone Should Know · `2` Consistency, CAP & Correctness |
+| **Building Blocks** | `3` Communication & Networking · `4` Databases & Storage · `5` Caching · `6` Messaging & Async · `7` Architecture Patterns · `8` Reliability & Resilience · `9` Observability & Delivery · `10` Specialized Components *(each with a decision table, numbers, pitfalls & a diagram)* |
 | **The Method** | `11` Design Framework · Interview Checklist |
-| **Case Studies** | URL Shortener · News Feed / Twitter · Chat / WhatsApp · Distributed Rate Limiter · Practice Problem Bank |
-| **Interview Prep** | Question Bank (18 prompts) · Concept → Tradeoff Flashcards (38 cards) |
-| **Study & Resources** | Study Plan · Canonical Resources · Prompts to Fan Out |
+| **Case Studies** | **9 fully worked designs** — URL Shortener · News Feed / Twitter · Chat / WhatsApp · Distributed Rate Limiter · Video Streaming · Ride-Sharing · Payment / Checkout · File Storage & Sync · Web Crawler — plus a Practice Problem Bank |
+| **Interview Prep** | Question Bank (18 prompts, each with a try-then-reveal **model answer**) · Annotated **Mock Interview** · Concept → Tradeoff Flashcards (38 cards, with a **review mode**) |
+| **Study & Resources** | Study Plan · Progress Tracker · Canonical Resources · Prompts to Fan Out |
 
 **The arc:** modules `0–2` are the mindset and vocabulary everything else assumes; `3–10` are the
 building blocks you assemble in any design; `11` is the method for driving a problem or interview;
@@ -43,10 +44,17 @@ then worked case studies and a practice bank put it into reps.
 
 ## Features
 
+- **Worked answers everywhere** — 9 case studies follow one 9-part design template; all 18
+  question-bank prompts have a try-then-reveal model answer; an annotated mock-interview transcript
+  shows the method performed live.
+- **Mermaid diagrams** — architecture diagrams rendered client-side (and they degrade to readable
+  source if the integration is ever removed).
 - **Full-text search** — static, client-side via [Pagefind](https://pagefind.app/) (no backend).
+- **Optional practice, still no backend** — flashcard *review mode* (Leitner spaced repetition), a
+  per-module *progress tracker*, and a *random question* button — all `localStorage`-only and fully
+  optional (every page works with JavaScript disabled).
 - **Dark / light theme**, responsive mobile nav, syntax-highlighted code, and callout asides.
 - **"Edit on GitHub"** on every page → low-friction contributions.
-- **Collapsible flashcards** using native `<details>` — no JavaScript.
 - **Cross-links** between modules, case studies, and the question bank.
 
 ## Tech stack
@@ -132,18 +140,19 @@ generated sitemap and canonical tags, not the build or navigation).
 
 Future "fan-outs" tracked in [`PRD.md`](./PRD.md) and [`HANDOVER.md`](./HANDOVER.md):
 
-- Architecture diagrams per case study (the ASCII diagrams can become images / Mermaid).
-- More worked case studies promoted from the practice bank (Uber, Dropbox, video streaming, web
-  crawler, payments, key-value store, autocomplete).
+- More worked case studies from the practice bank (key-value store, ad-click aggregator,
+  autocomplete, Google Docs, notification system).
+- Convert the remaining ASCII diagrams (chat, rate limiter) to Mermaid for visual consistency.
 - Per-module deep dives (see `resources/fan-out-prompts`).
-- Optional client-only quiz / spaced-repetition mode for flashcards (still no backend).
+- Richer annotated mock-interview transcripts for more problems.
 
 ## Contributing
 
 The site is open source and login-free. To improve or extend it: edit the Markdown in
 `src/content/docs/`, add the page to the sidebar in `astro.config.mjs`, run `npm run build` to
-verify, and open a PR. See [`CLAUDE.md`](./CLAUDE.md) for the content conventions and the
-delivery workflow this repo follows.
+verify, and open a PR. See **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** for the step-by-step guide,
+[`CLAUDE.md`](./CLAUDE.md) for content conventions, and
+[`docs/case-study-template.md`](./docs/case-study-template.md) for the case-study template.
 
 ## Acknowledgements
 

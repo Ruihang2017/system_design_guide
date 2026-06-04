@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://system-design-guide.netlify.app/sitemap-index.xml

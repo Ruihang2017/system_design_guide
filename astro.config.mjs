@@ -1,11 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://system-design-guide.netlify.app',
   integrations: [
+    // Mermaid must be registered BEFORE Starlight so its remark/rehype plugins
+    // process ```mermaid fenced blocks. Diagrams render client-side; if this
+    // integration is ever removed, the fenced blocks degrade to readable source.
+    mermaid({ theme: 'default', autoTheme: true }),
     starlight({
       title: 'From POC to Production',
       description:
@@ -21,6 +26,14 @@ export default defineConfig({
         baseUrl: 'https://github.com/ruihang2017/system_design_guide/edit/main/',
       },
       lastUpdated: true,
+      head: [
+        // Default Open Graph / Twitter card metadata for richer link previews.
+        { tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+        // Progressive-enhancement script for the optional client-only practice
+        // features (flashcard review mode, random question, progress tracker).
+        { tag: 'script', attrs: { src: '/sdg-enhance.js', defer: true } },
+      ],
       sidebar: [
         {
           label: 'Overview',
@@ -34,6 +47,7 @@ export default defineConfig({
           items: [
             { label: '0 · Functional vs Non-Functional', link: '/mindset/non-functional-requirements/' },
             { label: '1 · Estimation & Numbers', link: '/mindset/estimation/' },
+            { label: 'Numbers Everyone Should Know', link: '/mindset/numbers/' },
             { label: '2 · Consistency, CAP & Correctness', link: '/mindset/consistency-cap/' },
           ],
         },
@@ -64,6 +78,11 @@ export default defineConfig({
             { label: 'News Feed / Twitter', link: '/case-studies/news-feed/' },
             { label: 'Chat / WhatsApp', link: '/case-studies/chat-whatsapp/' },
             { label: 'Distributed Rate Limiter', link: '/case-studies/rate-limiter/' },
+            { label: 'Video Streaming (YouTube/Netflix)', link: '/case-studies/video-streaming/' },
+            { label: 'Ride-Sharing (Uber/Lyft)', link: '/case-studies/ride-sharing/' },
+            { label: 'Payment / Checkout', link: '/case-studies/payment-system/' },
+            { label: 'File Storage & Sync (Dropbox)', link: '/case-studies/file-storage-sync/' },
+            { label: 'Web Crawler', link: '/case-studies/web-crawler/' },
             { label: 'Practice Problem Bank', link: '/case-studies/practice-problems/' },
           ],
         },
@@ -71,6 +90,7 @@ export default defineConfig({
           label: 'Interview Prep',
           items: [
             { label: 'Question Bank', link: '/interview-prep/question-bank/' },
+            { label: 'Mock Interview (annotated)', link: '/interview-prep/mock-interview/' },
             { label: 'Concept → Tradeoff Flashcards', link: '/interview-prep/flashcards/' },
           ],
         },
@@ -78,6 +98,7 @@ export default defineConfig({
           label: 'Study & Resources',
           items: [
             { label: 'Study Plan', link: '/resources/study-plan/' },
+            { label: 'Progress Tracker', link: '/resources/progress/' },
             { label: 'Canonical Resources', link: '/resources/reading/' },
             { label: 'Prompts to Fan Out', link: '/resources/fan-out-prompts/' },
           ],

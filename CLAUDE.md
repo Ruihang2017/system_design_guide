@@ -51,7 +51,9 @@ Node 20+. Netlify runs `npm run build` and serves `dist/`.
   Body headings start at `##` (never `#`).
 - Use Starlight asides for emphasis: `:::tip` / `:::note` / `:::caution`.
 - **After creating any page, add it to the `sidebar` in `astro.config.mjs`** or it won't be linked.
-- New module / case study → `src/content/docs/<group>/<slug>.md` + a sidebar entry.
+- New module / case study → `src/content/docs/<group>/<slug>.md` + a sidebar entry. New case studies
+  follow the 9-part spine in `docs/case-study-template.md` (exemplars: `case-studies/chat-whatsapp.md`,
+  `rate-limiter.md`).
 - New flashcard → a `<details>` block in `interview-prep/flashcards.md` (keep the blank lines so the
   answer renders as Markdown):
   ```html

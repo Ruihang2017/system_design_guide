@@ -1,11 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://system-design-guide.netlify.app',
   integrations: [
+    // Mermaid must be registered BEFORE Starlight so its remark/rehype plugins
+    // process ```mermaid fenced blocks. Diagrams render client-side; if this
+    // integration is ever removed, the fenced blocks degrade to readable source.
+    mermaid({ theme: 'default', autoTheme: true }),
     starlight({
       title: 'From POC to Production',
       description:

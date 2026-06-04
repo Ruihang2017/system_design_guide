@@ -20,7 +20,7 @@ search, dark/light mode, mobile nav, "Edit on GitHub" links. No backend — depl
 | Building Blocks | Networking · Databases · Caching · Messaging · Architecture Patterns · Reliability · Observability · Specialized Components |
 | The Method | Design Framework · Interview Checklist *(new)* |
 | Case Studies | URL Shortener · News Feed/Twitter · **Chat/WhatsApp** *(new)* · **Distributed Rate Limiter** *(new)* · Practice Problem Bank |
-| Interview Prep | Question Bank — 18 prompts *(new)* · Flashcards — 46 cards *(new)* |
+| Interview Prep | Question Bank — 18 prompts *(new)* · Flashcards — 38 cards *(new)* |
 | Study & Resources | Study Plan · Canonical Resources · Prompts to Fan Out |
 
 ## How to run

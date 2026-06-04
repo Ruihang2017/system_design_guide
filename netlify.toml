@@ -1,0 +1,9 @@
+# Netlify build configuration for the Astro + Starlight static site.
+# The deployed artifact is fully static HTML/CSS/JS — no backend.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

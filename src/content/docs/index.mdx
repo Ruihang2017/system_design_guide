@@ -1,0 +1,53 @@
+---
+title: From POC to Production
+description: A self-study system design guide for engineers who can already build things and now want to design things that survive scale, failure, and time.
+template: splash
+hero:
+  tagline: You already know how to make things work. System design is the discipline of making them keep working — at scale, through failure, over years, with a team.
+  actions:
+    - text: Start with the mindset
+      link: /mindset/non-functional-requirements/
+      icon: right-arrow
+      variant: primary
+    - text: The design framework
+      link: /method/framework/
+      icon: open-book
+    - text: Practice case studies
+      link: /case-studies/url-shortener/
+      icon: rocket
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## How to use this guide
+
+You've spent years getting things to **work** — wiring up services, shipping POCs, proving ideas fast. System design is a different muscle: making things keep working when traffic goes up 100×, when a server dies at 3am, when the table has 4 billion rows, and when three teams need to change the same system without breaking each other.
+
+The guide is organized so you can **"fan out"**: skim this map, then go deep on one module at a time. Every page is self-contained.
+
+<CardGrid>
+  <Card title="Core Mindset" icon="open-book">
+    The vocabulary and tradeoffs: [non-functional requirements](/mindset/non-functional-requirements/), [estimation](/mindset/estimation/), and [consistency &amp; CAP](/mindset/consistency-cap/). Read these first.
+  </Card>
+  <Card title="Building Blocks" icon="puzzle">
+    The Lego bricks: [networking](/building-blocks/networking/), [databases](/building-blocks/databases/), [caching](/building-blocks/caching/), [messaging](/building-blocks/messaging/), [architecture](/building-blocks/architecture-patterns/), [reliability](/building-blocks/reliability/), [observability](/building-blocks/observability/), and [specialized components](/building-blocks/specialized-components/).
+  </Card>
+  <Card title="The Method" icon="list-format">
+    How to [drive a design problem](/method/framework/) end-to-end, plus a one-page [interview checklist](/method/interview-checklist/).
+  </Card>
+  <Card title="Practice" icon="rocket">
+    Four [worked case studies](/case-studies/url-shortener/), a [practice problem bank](/case-studies/practice-problems/), an [interview question bank](/interview-prep/question-bank/), and [flashcards](/interview-prep/flashcards/).
+  </Card>
+</CardGrid>
+
+## The arc
+
+- **Modules 0–2** — the mindset and vocabulary. Everything else assumes them.
+- **Modules 3–10** — the building blocks you assemble in any design.
+- **Module 11** — the method: driving a system design problem or interview.
+- **Case studies** — fully worked examples, then a bank of practice problems.
+- **Study &amp; resources** — a sequenced [study plan](/resources/study-plan/) and [reading list](/resources/reading/).
+
+:::tip[The throughline]
+You already know how to make things work. System design is the discipline of making them **keep** working — at scale, through failure, over years, with a team. Every technique here buys one of those properties, usually by trading away another. Learn the trades, not the trivia.
+:::

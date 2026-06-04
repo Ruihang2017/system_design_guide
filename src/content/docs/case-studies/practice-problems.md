@@ -10,6 +10,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* real-time delivery, message ordering, online presence, delivery/read receipts, offline message storage.
 - *Concepts:* WebSockets, message queues, sequencing, fan-out.
 - *Direction:* persistent connections per user via a connection/gateway layer, a message store, push to recipients (and queue for offline).
+- **Worked solution → [Chat / WhatsApp case study](/case-studies/chat-whatsapp/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -18,6 +19,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* enforce a global limit across many servers with minimal latency.
 - *Concepts:* token/leaky bucket, sliding window, shared counters.
 - *Direction:* centralized counters in Redis with atomic operations; consider per-edge approximate limits.
+- **Worked solution → [Distributed Rate Limiter case study](/case-studies/rate-limiter/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -34,6 +36,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* store and deliver huge video files globally with smooth playback.
 - *Concepts:* object storage, CDN, transcoding pipeline, adaptive bitrate streaming.
 - *Direction:* upload → async transcode into multiple resolutions → store + CDN → client adapts quality to bandwidth.
+- **Worked solution → [Video Streaming case study](/case-studies/video-streaming/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -42,6 +45,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* match riders to nearby drivers in real time as locations stream in.
 - *Concepts:* geospatial indexing (geohash/quadtree), high-frequency location updates, matching.
 - *Direction:* drivers publish location to a geo-index; match by proximity; handle the dispatch race.
+- **Worked solution → [Ride-Sharing case study](/case-studies/ride-sharing/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -50,6 +54,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* sync files across devices efficiently, handle large files and conflicts.
 - *Concepts:* chunking, deduplication, metadata vs blob separation, conflict resolution.
 - *Direction:* split files into chunks (hash each), upload only changed chunks, store metadata in a DB and chunks in object storage.
+- **Worked solution → [File Storage & Sync case study](/case-studies/file-storage-sync/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -58,6 +63,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* crawl billions of pages politely without re-crawling or overloading sites.
 - *Concepts:* URL frontier (priority queue), dedup (Bloom filter), politeness/rate limiting, distributed coordination.
 - *Direction:* frontier feeds workers; dedup seen URLs; respect robots.txt and per-host limits.
+- **Worked solution → [Web Crawler case study](/case-studies/web-crawler/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 
@@ -66,6 +72,7 @@ Work these yourself using the Part 11 framework. For each, I've given the crux, 
 - *Crux:* charge exactly once, never double-charge, stay consistent across services.
 - *Concepts:* idempotency keys, strong consistency, Saga/2PC, ledger design.
 - *Direction:* idempotent payment intents, a transactional ledger, sagas for multi-service order flows. (Correctness-first, not scale-first.)
+- **Worked solution → [Payment / Checkout case study](/case-studies/payment-system/)** (try it yourself first).
 
 *Challenge sheet: do this one timed (~45 min) — write requirements + estimates first, name two tradeoffs, then go deep on the hardest part.*
 

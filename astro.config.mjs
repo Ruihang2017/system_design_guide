@@ -26,6 +26,11 @@ export default defineConfig({
         baseUrl: 'https://github.com/ruihang2017/system_design_guide/edit/main/',
       },
       lastUpdated: true,
+      head: [
+        // Default Open Graph / Twitter card metadata for richer link previews.
+        { tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+      ],
       sidebar: [
         {
           label: 'Overview',
@@ -39,6 +44,7 @@ export default defineConfig({
           items: [
             { label: '0 · Functional vs Non-Functional', link: '/mindset/non-functional-requirements/' },
             { label: '1 · Estimation & Numbers', link: '/mindset/estimation/' },
+            { label: 'Numbers Everyone Should Know', link: '/mindset/numbers/' },
             { label: '2 · Consistency, CAP & Correctness', link: '/mindset/consistency-cap/' },
           ],
         },

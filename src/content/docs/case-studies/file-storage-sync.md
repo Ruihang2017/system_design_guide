@@ -28,7 +28,7 @@ Assume **500 M registered users**, 100 M daily active users. Average user stores
 Average file size: ~2 MB. A user edits ~10 files per day. The critical observation is that a typical edit changes only a small fraction of the file — a 2 MB document where one paragraph was updated might have only ~20 KB of truly changed bytes. A naive design that re-uploads the full 2 MB wastes **100× bandwidth**.
 
 *Metadata vs blob volume:*
-Each file's metadata record (chunk list, version, name, timestamps, owner) is ~2 KB. Total metadata: 500 M users × 5,000 files each × 2 KB ≈ **5 TB** — a rounding error compared to the 5 EB of blob data. This asymmetry is key: serve metadata from a transactional database, blobs from object storage. Do not conflate them.
+Each file's metadata record (chunk list, version, name, timestamps, owner) is ~2 KB. Total metadata: 500 M users × 5,000 files each × 2 KB ≈ **5 PB** — three orders of magnitude smaller than the 5 EB of blob data. This asymmetry is key: serve metadata from a transactional database, blobs from object storage. Do not conflate them.
 
 *Change-feed traffic:*
 100 M DAU × 10 edits/day = 1 B file change events per day → ~11,600 events/second on average; peak at 3× ≈ 35 K/s. Each event is lightweight (file ID, version pointer, affected chunks) — metadata, not blob bytes.

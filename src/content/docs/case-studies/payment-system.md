@@ -26,7 +26,7 @@ Payment systems are not a scale problem. They are a **correctness problem**. Dou
 
 A large e-commerce platform at 500K orders/day → ~6 payments/second on average; ~30–50/s at peak (holiday spikes). Even a high-volume payments company like Stripe processes roughly a few thousand payment intents per second fleet-wide — orders of magnitude below the read QPS of a social feed.
 
-Each payment-intent record: ~1–2 KB (metadata, amounts, status, timestamps). Each ledger entry: ~500 bytes. A ledger storing 5 years of records at 50 payments/s × 2 entries/payment × 500 bytes × 157M seconds ≈ **~80 GB** — trivially fits in a single well-provisioned relational database, let alone a replicated cluster.
+Each payment-intent record: ~1–2 KB (metadata, amounts, status, timestamps). Each ledger entry: ~500 bytes. A ledger storing 5 years of records at the ~6 payments/s average × 2 entries/payment × 500 bytes × 157M seconds ≈ **~1 TB** — fits comfortably in a single well-provisioned relational database, and trivially in a replicated cluster.
 
 The design constraint that matters is not throughput or storage — it is **write correctness under concurrent retries and partial failures**. The relevant question in estimation is: what is the idempotency key collision rate, and how quickly do payment-gateway round-trips need to complete? Gateway latency (200–800ms per call) sets the user-visible latency floor; everything else is dominated by that.
 

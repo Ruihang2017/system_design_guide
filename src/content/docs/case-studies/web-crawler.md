@@ -79,7 +79,7 @@ Storage: a distributed message queue (Kafka topics partitioned by `murmur2(host)
 
 ### Seen-URL set (deduplication)
 
-A naive hash set of 250B URLs would require ~25 TB of memory. Instead, use a **Bloom filter**:
+A naive hash set of 50B URLs would require ~5 TB of memory. Instead, use a **Bloom filter**:
 
 - A Bloom filter answers "have we seen this URL?" with **no false negatives** (if the filter says "not seen," it has definitely not been seen) and a **tunable false-positive rate** (occasionally it will say "seen" for a new URL — that URL gets skipped, which is acceptable).
 - At a 0.1% false-positive rate, a Bloom filter for 50B URLs requires roughly **~90 GB** — fits on a single large machine or a small Redis cluster.
@@ -148,7 +148,7 @@ This structure is essentially a **distributed BFS with priority**: crawl importa
 ### (b) Dedup at scale: Bloom filter mechanics
 
 The Bloom filter is the right structure because:
-1. **Memory:** 50B URLs × 1.44 bits/element at 1% FPR ≈ ~9 GB. Trivially fits in RAM.
+1. **Memory:** at a 1% false-positive rate a Bloom filter needs ~9.6 bits/element, so 50B URLs ≈ ~60 GB (a stricter 0.1% rate needs ~14.4 bits ≈ ~90 GB, the §4 figure). Either fits in RAM on a large node or a small cluster.
 2. **Speed:** a lookup is O(k) hash computations (k ≈ 7 for 1% FPR) — nanoseconds.
 3. **Acceptable error mode:** a false positive means a valid new URL is skipped. Given tens of billions of URLs, occasionally missing one is far better than the cost of exact deduplication.
 
